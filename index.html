@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./calculator.png" />
+    <title>BMI Calculator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+      body {
+        background-image: url("./health.jpg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      .container {
+        background-color: white;
+        height: 500px;
+        width: 500px;
+        margin: 120px auto;
+        border-radius: 15px;
+        box-shadow: 3px 3px 15px black;
+        padding: 20px;
+        text-align: center;
+      }
+      input[type="text"] {
+        height: 40px;
+        width: 200px;
+        border-radius: 7px;
+        padding: 5px;
+        font-size: 20px;
+        border: 1px solid grey;
+        outline: none;
+      }
+      input[type="text"]:focus {
+        border: 1px solid skyblue;
+      }
+      button {
+        background-color: skyblue;
+        height: 45px;
+        width: 120px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>BMI Calculator</h2>
+      <hr />
+      <input type="text" id="heightText" placeholder="Height in feet" required/>
+      <br /><br />
+      <input type="text" id="weightText" placeholder="Weight in kg" required/>
+      <br /><br />
+      <button id="calculate">CALCULATE</button>
+      <hr />
+      <h2>Results</h2>
+      <p id="result"></p>
+      <p id="comments"></p>
+    </div>
+    <script>
+      let calculate = document.getElementById("calculate");
+      let res = document.getElementById("result");
+      let com = document.getElementById("comments");
+      calculate.addEventListener("click", function () {
+        let h = parseFloat(document.getElementById("heightText").value);
+        let w = parseFloat(document.getElementById("weightText").value);
+        let h_m = h * 0.3048;
+        let bmi = w / (h_m * h_m);
+        res.textContent = "Your BMI is: " + bmi.toFixed(2);
+        if (bmi < 18.5) {
+          com.style.color = "lightgreen";
+          com.textContent = "You are UNDERWEIGHT";
+        } else if (bmi<25) {
+          com.style.color = "green";
+          com.textContent = "You are NORMAL";
+        } else if (bmi<30) {
+          com.style.color = "yellow";
+          com.textContent = "You are OVERWEIGHT";
+        } else if (bmi < 35) {
+          com.style.color = "orange";
+          com.textContent = "You are OBESE";
+        } else {
+          com.style.color = "red";
+          com.textContent = "You are EXTREMELY OBESE";
+        }
+      });
+    </script>
+  </body>
+</html>
